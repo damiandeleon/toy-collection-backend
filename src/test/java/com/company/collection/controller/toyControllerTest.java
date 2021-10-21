@@ -18,7 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -49,6 +49,13 @@ public class toyControllerTest {
         daoToy.setFaction("Good");
         daoToy.setMaxForAge(8);
 
+        Toy daoToy3 = new Toy();
+        daoToy3.setId(99);
+        daoToy3.setName("Optimus Prime");
+        daoToy3.setToyLine("Transformers");
+        daoToy3.setFaction("Good");
+        daoToy3.setMaxForAge(8);
+
         Toy daoToy2 = new Toy();
         daoToy2.setId(33);
         daoToy2.setName("Skeletor");
@@ -58,6 +65,7 @@ public class toyControllerTest {
 
         allToys.add(daoToy);
         allToys.add(daoToy2);
+        allToys.add(daoToy3);
 
         daoToyJson = mapper.writeValueAsString(daoToy);
         String dooToyJson2 = mapper.writeValueAsString(daoToy2);
@@ -67,7 +75,7 @@ public class toyControllerTest {
     }
 
     @Test
-    public void addToyWithPostMethod() throws Exception {
+    public void shouldAddToyWithPostMethod() throws Exception {
 
         Toy toy = new Toy();
         toy.setId(99);
@@ -87,5 +95,49 @@ public class toyControllerTest {
         )
                 .andExpect(status().isCreated())
                 .andExpect(content().json(daoToyJson));
+    }
+
+    @Test
+    public void shouldGetAllToys() throws Exception {
+
+        given(dao.findAll()).willReturn(allToys);
+
+        mockMvc.perform(
+                get("/toys")
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().json(allToysJson));
+
+    }
+
+    @Test
+    public void shouldGetToyByIdWithGetMethod() throws Exception {
+
+        given(dao.findById(99)).willReturn(java.util.Optional.ofNullable(daoToy));
+
+        mockMvc.perform(
+                get("/toys/99")
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().json(daoToyJson));
+
+    }
+
+    @Test
+    public void shouldUpdateToyWithPutRequest() throws Exception {
+
+        mockMvc.perform(
+                put("/toys/33")
+                        .content(daoToyJson)
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void shouldDeleteToyWithDeleteRequest() throws Exception {
+
+        mockMvc.perform(delete("/toys/2")).andExpect(status().isOk());
     }
 }

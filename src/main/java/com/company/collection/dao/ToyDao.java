@@ -10,7 +10,6 @@ import java.util.List;
 public interface ToyDao extends JpaRepository<Toy, Integer> {
 
     List<Toy> findByFaction(String faction);
-
     List<Toy> findByToyLine(String toyLine);
 
 }
