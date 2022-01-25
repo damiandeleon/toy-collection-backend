@@ -12,10 +12,10 @@ public class Toy {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String name;
+    private String toyName;
     private String toyLine;
     private String faction;
-    private int maxForAge;
+    private String maxForAge;
 
     public Integer getId() {
         return id;
@@ -25,12 +25,12 @@ public class Toy {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getToyName() {
+        return toyName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setToyName(String toyName) {
+        this.toyName = toyName;
     }
 
     public String getToyLine() {
@@ -49,11 +49,11 @@ public class Toy {
         this.faction = faction;
     }
 
-    public int getMaxForAge() {
+    public String getMaxForAge() {
         return maxForAge;
     }
 
-    public void setMaxForAge(int maxForAge) {
+    public void setMaxForAge(String maxForAge) {
         this.maxForAge = maxForAge;
     }
 
@@ -62,19 +62,19 @@ public class Toy {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Toy toy = (Toy) o;
-        return maxForAge == toy.maxForAge && Objects.equals(id, toy.id) && Objects.equals(name, toy.name) && Objects.equals(toyLine, toy.toyLine) && Objects.equals(faction, toy.faction);
+        return maxForAge == toy.maxForAge && Objects.equals(id, toy.id) && Objects.equals(toyName, toy.toyName) && Objects.equals(toyLine, toy.toyLine) && Objects.equals(faction, toy.faction);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, toyLine, faction, maxForAge);
+        return Objects.hash(id, toyName, toyLine, faction, maxForAge);
     }
 
     @Override
     public String toString() {
         return "Toy{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", toyName='" + toyName + '\'' +
                 ", toyLine='" + toyLine + '\'' +
                 ", faction='" + faction + '\'' +
                 ", maxForAge=" + maxForAge +

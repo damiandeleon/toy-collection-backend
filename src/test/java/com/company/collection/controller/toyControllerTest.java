@@ -44,24 +44,24 @@ public class toyControllerTest {
 
         daoToy = new Toy();
         daoToy.setId(99);
-        daoToy.setName("He-Man");
+        daoToy.setToyName("He-Man");
         daoToy.setToyLine("Masters of the Universe");
         daoToy.setFaction("Good");
-        daoToy.setMaxForAge(8);
+        daoToy.setMaxForAge("8");
 
         Toy daoToy3 = new Toy();
         daoToy3.setId(99);
-        daoToy3.setName("Optimus Prime");
+        daoToy3.setToyName("Optimus Prime");
         daoToy3.setToyLine("Transformers");
         daoToy3.setFaction("Good");
-        daoToy3.setMaxForAge(8);
+        daoToy3.setMaxForAge("8");
 
         Toy daoToy2 = new Toy();
         daoToy2.setId(33);
-        daoToy2.setName("Skeletor");
+        daoToy2.setToyName("Skeletor");
         daoToy2.setToyLine("Masters of the Universe");
         daoToy2.setFaction("Evil");
-        daoToy2.setMaxForAge(8);
+        daoToy2.setMaxForAge("8");
 
         allToys.add(daoToy);
         allToys.add(daoToy2);
@@ -79,10 +79,10 @@ public class toyControllerTest {
 
         Toy toy = new Toy();
         toy.setId(99);
-        toy.setName("He-Man");
+        toy.setToyName("He-Man");
         toy.setToyLine("Masters of the Universe");
         toy.setFaction("Good");
-        toy.setMaxForAge(8);
+        toy.setMaxForAge("8");
 
         String toyJson = mapper.writeValueAsString(toy);
 

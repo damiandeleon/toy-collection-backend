@@ -21,7 +21,8 @@ public class toyController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public Toy createToy(@RequestBody Toy toy){
-        System.out.println("CREATING TOY");
+        System.out.println(toy);
+
         toyDao.save(toy);
         return toy;
     }
